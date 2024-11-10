@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toast_bg"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/toast"
+    android:gravity="center"
+    android:minWidth="@dimen/dp_60"
+    android:minHeight="@dimen/dp_25"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/dp_12"
+    android:paddingVertical="@dimen/dp_6">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/toast_tips"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/dp_5"
+        android:visibility="gone"
+        tools:src="@drawable/ic_error"
+        tools:text="X"
+        tools:tint="@color/toast_error"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/toast_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        tools:text="扫码错误，你重新扫码" />
+
+</LinearLayout>

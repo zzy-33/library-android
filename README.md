@@ -1,2 +1,0 @@
-# base-android
-android base
