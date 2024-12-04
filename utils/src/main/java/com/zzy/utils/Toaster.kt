@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.graphics.Color
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -42,7 +45,7 @@ object Toaster {
         gravity: Int = Gravity.TOP,
         duration: Int = Toast.LENGTH_SHORT
     ) {
-        showMainToast(text, tips, gravity, duration)
+        showTopToast(text, tips, gravity, duration)
     }
 
     /**
@@ -64,7 +67,27 @@ object Toaster {
         // 获取Toast显示的文本
         val text = mApplication!!.getString(textResId)
         // 调用主Toast显示函数显示信息
-        showMainToast(text, tips, gravity, duration)
+        showTopToast(text, tips, gravity, duration)
+    }
+
+    private fun showTopToast(
+        text: String,
+        tips: ToastType = ToastType.idle,
+        gravity: Int = Gravity.TOP,
+        duration: Int = Toast.LENGTH_SHORT
+    ) {
+        try {
+            // 确保在主线程上执行
+            if (Looper.myLooper() != Looper.getMainLooper()) {
+                Handler(Looper.getMainLooper()).post {
+                    showMainToast(text, tips, gravity, duration)
+                }
+            } else {
+                showMainToast(text, tips, gravity, duration)
+            }
+        } catch (e: Exception) {
+            Log.e("ToastUtils", "Failed to show toast: ${e.message}")
+        }
     }
 
     /**
